@@ -11,6 +11,7 @@ import { TodoService } from './services/todo/todo.service';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
+        // This data came from a docker container
         type: 'mariadb',
         host: configService.get('DB_HOST', 'localhost'),
         port: Number(configService.get('DB_PORT', 3306)),
@@ -18,7 +19,7 @@ import { TodoService } from './services/todo/todo.service';
         password: configService.get('DB_PASSWORD', '123'),
         database: configService.get('DB_NAME', 'todo'),
         entities: [],
-        synchronize: true,
+        synchronize: true, //Remove this line if you don't want to drop database each time you start the server
       }),
     }),
   ],
