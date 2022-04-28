@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { deleteTaskDto } from 'src/dto/delete-app-dto';
 import { createTodoDto } from 'src/dto/todo-app-dto';
 import { updateTodoDto } from 'src/dto/update-todo-dto';
 import { TodoEntity } from 'src/entitys/todo.entity';
@@ -33,7 +34,7 @@ export class TodoService {
     }
     return await this.todoRepository.findOne(id);
   }
-  async softDelete(id: string): Promise<TodoEntity> {
+  async softDelete(id: deleteTaskDto): Promise<deleteTaskDto> {
     const todo = await this.todoRepository.findOne(id);
     await this.todoRepository.softDelete(id);
     return todo;

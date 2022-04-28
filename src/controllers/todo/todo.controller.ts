@@ -9,6 +9,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { deleteTaskDto } from 'src/dto/delete-app-dto';
 import { createTodoDto } from 'src/dto/todo-app-dto';
 import { updateTodoDto } from 'src/dto/update-todo-dto';
 import { TodoService } from 'src/services/todo/todo.service';
@@ -37,7 +38,7 @@ export class TodoController {
   }
   @Delete('/:id')
   @HttpCode(204) //Its a 204 no content to indicate that the request has been fulfilled and no additional content will be returned.
-  async destroy(@Param('id', new ParseUUIDPipe()) id: string) {
+  async destroy(@Param('id', new ParseUUIDPipe()) id: deleteTaskDto) {
     return this.todoService.softDelete(id);
   }
 }
