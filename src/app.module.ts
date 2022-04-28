@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TodoController } from './controllers/todo/todo.controller';
+import { join } from 'path';
 import { TodoModule } from './modules/todo/todo.module';
-import { TodoService } from './services/todo/todo.service';
 
 @Module({
   imports: [
@@ -18,14 +17,13 @@ import { TodoService } from './services/todo/todo.service';
         username: configService.get('DB_USERNAME', 'root'),
         password: configService.get('DB_PASSWORD', '123'),
         database: configService.get('DB_NAME', 'todo'),
-        entities: [],
+        entities: [join(__dirname, '**', '*.entity.{ts,js}')], //Declare the entities that are going to be used in the database, in this sample this read all files .entity.ts in the folder src/controllers/todo/entity
         synchronize: true, //Remove this line if you don't want to drop database each time you start the server
       }),
     }),
     TodoModule,
   ],
-  controllers: [TodoController],
-  providers: [TodoService],
-  exports: [TodoService], //Export the service so that it can be used in other modules
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
