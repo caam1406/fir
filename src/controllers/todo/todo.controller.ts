@@ -9,6 +9,8 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { createTodoDto } from 'src/dto/todo-app-dto';
+import { updateTodoDto } from 'src/dto/update-todo-dto';
 import { TodoService } from 'src/services/todo/todo.service';
 
 @Controller('api/v1/todos') // http://localhost:3000/api/v1/todos
@@ -19,7 +21,7 @@ export class TodoController {
     return this.todoService.findAll();
   }
   @Post()
-  async create(@Body() body) {
+  async create(@Body() body: createTodoDto) {
     return this.todoService.create(body);
   }
   @Get('/:id')
@@ -27,7 +29,10 @@ export class TodoController {
     return this.todoService.findOneOrFail(id);
   }
   @Put('/:id')
-  async update(@Param('id', new ParseUUIDPipe()) id: string, @Body() body) {
+  async update(
+    @Param('id', new ParseUUIDPipe()) id: string,
+    @Body() body: updateTodoDto,
+  ) {
     return this.todoService.update(id, body);
   }
   @Delete('/:id')
