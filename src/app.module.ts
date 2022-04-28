@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TodoController } from './controllers/todo/todo.controller';
-// import { TodoModule } from './modules/todo/todo.module';
+import { TodoModule } from './modules/todo/todo.module';
 import { TodoService } from './services/todo/todo.service';
 
 @Module({
@@ -22,8 +22,10 @@ import { TodoService } from './services/todo/todo.service';
         synchronize: true, //Remove this line if you don't want to drop database each time you start the server
       }),
     }),
+    TodoModule,
   ],
   controllers: [TodoController],
   providers: [TodoService],
+  exports: [TodoService], //Export the service so that it can be used in other modules
 })
 export class AppModule {}
