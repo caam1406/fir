@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { TodoService } from 'src/services/todo/todo.service';
 
-@Controller('api/v1/todos')
+@Controller('api/v1/todos') // http://localhost:3000/api/v1/todos
 export class TodoController {
   constructor(private readonly todoService: TodoService) {}
   @Get()
