@@ -13,7 +13,7 @@ export class TodoService {
   async findAll(): Promise<TodoEntity[]> {
     return await this.todoRepository.find();
   }
-  async findOneOrFail(id: number): Promise<TodoEntity> {
+  async findOneOrFail(id: string): Promise<TodoEntity> {
     try {
       return await this.todoRepository.findOneOrFail(id);
     } catch (error) {
@@ -23,7 +23,7 @@ export class TodoService {
   async create(todo: TodoEntity): Promise<TodoEntity> {
     return await this.todoRepository.save(this.todoRepository.create(todo));
   }
-  async update(id: number, todo: TodoEntity): Promise<TodoEntity> {
+  async update(id: string, todo: TodoEntity): Promise<TodoEntity> {
     try {
       await this.todoRepository.update(id, todo);
     } catch (error) {
