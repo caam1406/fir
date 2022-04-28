@@ -10,7 +10,7 @@ import {
 @Entity({ name: 'todos' }) //Set Table Name
 export class TodoEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
   @Column({ type: 'varchar', length: 25 })
   title: string;
   @Column({ type: 'varchar', length: 255 })
